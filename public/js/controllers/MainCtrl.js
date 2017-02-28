@@ -1,5 +1,21 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
+angular.module('MainCtrl',[]).controller('MainController', function($scope,$uibModal) {
 	var chart,msg;
+	$scope.openModal = function() {
+		var modalInstance = $uibModal.open({
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'views/sample.html',
+      controller: 'ModalInstanceController'
+    });
+
+    modalInstance.result.then(function () {
+      console.log('closed');
+		}, function () {
+      console.log('canceled');
+    });
+
+	};
+
 	var drawchart = function(div) {
 
 		google.charts.load('current', {'packages':['corechart']});
@@ -75,4 +91,11 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
 	drawchart('areachart');
 	drawchart('columnchart');
 	piechart();
+}).controller('ModalInstanceController', function($scope,$uibModalInstance) {
+	$scope.close = function() {
+		$uibModalInstance.close("closed");
+	};
+	$scope.cancel = function() {
+		$uibModalInstance.dismiss("canceled");
+	};
 });

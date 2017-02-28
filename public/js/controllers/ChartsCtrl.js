@@ -1,5 +1,5 @@
 angular.module('ChartsCtrl', []).controller('ChartsController', function($scope) {
 
-	$scope.msg = "action triggered"
+	$scope.msg = "action triggered";
 
 });
